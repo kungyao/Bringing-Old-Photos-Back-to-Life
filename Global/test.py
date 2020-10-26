@@ -98,12 +98,16 @@ if __name__ == "__main__":
     model.initialize(opt)
     model.eval()
 
-    if not os.path.exists(opt.outputs_dir + "/" + "input_image"):
-        os.makedirs(opt.outputs_dir + "/" + "input_image")
-    if not os.path.exists(opt.outputs_dir + "/" + "restored_image"):
-        os.makedirs(opt.outputs_dir + "/" + "restored_image")
-    if not os.path.exists(opt.outputs_dir + "/" + "origin"):
-        os.makedirs(opt.outputs_dir + "/" + "origin")
+    input_image = os.path.join(opt.outputs_dir, 'input_image')
+    restored_image = os.path.join(opt.outputs_dir, 'restored_image')
+    origin_image = os.path.join(opt.outputs_dir, 'origin')
+    
+    if not os.path.exists(input_image):
+        os.makedirs(input_image)
+    if not os.path.exists(restored_image):
+        os.makedirs(restored_image)
+    if not os.path.exists(origin_image):
+        os.makedirs(origin_image)
 
     dataset_size = 0
 
@@ -162,18 +166,18 @@ if __name__ == "__main__":
 
         image_grid = vutils.save_image(
             (input + 1.0) / 2.0,
-            opt.outputs_dir + "/input_image/" + input_name,
+            os.path.join(input_image, input_name)
             nrow=1,
             padding=0,
             normalize=True,
         )
         image_grid = vutils.save_image(
             (generated.data.cpu() + 1.0) / 2.0,
-            opt.outputs_dir + "/restored_image/" + input_name,
+            os.path.join(restored_image, input_name)
             nrow=1,
             padding=0,
             normalize=True,
         )
 
-        origin.save(opt.outputs_dir + "/origin/" + input_name)
+        origin.save(os.path.join(origin_image, input_name))
 
