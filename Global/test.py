@@ -89,12 +89,10 @@ def parameter_set(opt):
 
 
 if __name__ == "__main__":
-
     opt = TestOptions().parse(save=False)
     parameter_set(opt)
 
     model = Pix2PixHDModel_Mapping()
-
     model.initialize(opt)
     model.eval()
 
@@ -166,14 +164,14 @@ if __name__ == "__main__":
 
         image_grid = vutils.save_image(
             (input + 1.0) / 2.0,
-            os.path.join(input_image, input_name)
+            os.path.join(input_image, input_name),
             nrow=1,
             padding=0,
             normalize=True,
         )
         image_grid = vutils.save_image(
             (generated.data.cpu() + 1.0) / 2.0,
-            os.path.join(restored_image, input_name)
+            os.path.join(restored_image, input_name),
             nrow=1,
             padding=0,
             normalize=True,

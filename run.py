@@ -15,7 +15,7 @@ if __name__ == "__main__":
         default="/home/jingliao/ziyuwan/workspace/codes/PAMI/outputs",
         help="Restored images, please use the absolute path",
     )
-    parser.add_argument("--GPU", type=str, default="0, 1", help="0,1,2")
+    parser.add_argument("--GPU", type=str, default="0,1", help="0,1,2")
     parser.add_argument(
         "--checkpoint_name", type=str, default="Setting_9_epoch_100", help="choose which checkpoint"
     )
@@ -48,7 +48,6 @@ if __name__ == "__main__":
         )
         os.system(stage_1_command)
     else:
-
         mask_dir = os.path.join(stage_1_output_dir, "masks")
         new_input = os.path.join(mask_dir, "input")
         new_mask = os.path.join(mask_dir, "mask")
@@ -67,7 +66,6 @@ if __name__ == "__main__":
             + " --outputs_dir "
             + stage_1_output_dir
         )
-
         os.system(stage_1_command_1)
         os.system(stage_1_command_2)
 
